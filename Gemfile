@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -44,7 +46,22 @@ gem "responders"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'react-rails'
+gem "react-rails"
+
+group :development, :test do
+  # previous gems under this group as it was
+
+  # For code formatting and linting
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+end
+
+group :development do
+  # previous gems under this group as it was
+
+  # For linting ERB files
+  gem "erb_lint", require: false, git: "https://github.com/Shopify/erb-lint.git", branch: "main"
+end
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
