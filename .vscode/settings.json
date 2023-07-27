@@ -18,4 +18,8 @@
     }
   },
   "ruby.format": "rubocop",
+  "cSpell.words": [
+    "toastify",
+    "Toastr"
+  ],
 }
