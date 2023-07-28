@@ -1,5 +1,4 @@
 import axios from "axios";
-import Logger from "js-logger";
 
 import Toastr from "components/Common/Toastr";
 import { setToLocalStorage, getFromLocalStorage } from "utils/storage";
@@ -29,7 +28,6 @@ const handleSuccessResponse = response => {
   if (response) {
     response.success = response.status === 200;
     if (response.data.notice) {
-      Logger.log(response);
       Toastr.success(response.data.notice);
     }
   }
