@@ -6,6 +6,7 @@ import { setToLocalStorage, getFromLocalStorage } from "utils/storage";
 const DEFAULT_ERROR_NOTIFICATION = "Something went wrong!";
 
 axios.defaults.baseURL = "/";
+let registerInterceptsFlag = false;
 
 const setAuthHeaders = (setLoading = () => null) => {
   axios.defaults.headers = {
@@ -52,6 +53,8 @@ const handleErrorResponse = axiosErrorObject => {
 };
 
 const registerIntercepts = () => {
+  if (registerInterceptsFlag) return;
+  registerInterceptsFlag = true;
   axios.interceptors.response.use(handleSuccessResponse, error =>
     handleErrorResponse(error)
   );
