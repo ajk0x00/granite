@@ -15,7 +15,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    render_json({ task: @task, assigned_user: @task.assigned_user })
   end
 
   def update
