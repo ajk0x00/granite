@@ -48,6 +48,8 @@ gem "responders"
 
 gem "react-rails"
 
+gem "bcrypt", "~> 3.1.13"
+
 group :development, :test do
   # previous gems under this group as it was
 
