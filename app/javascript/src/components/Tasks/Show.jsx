@@ -8,6 +8,7 @@ import PageLoader from "components/PageLoader";
 
 const Show = () => {
   const [taskDetails, setTaskDetails] = useState([]);
+  const [assignedUser, setAssignedUser] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
 
@@ -20,9 +21,10 @@ const Show = () => {
   const fetchTaskDetails = async () => {
     try {
       const {
-        data: { task },
+        data: { task, assigned_user },
       } = await tasksApi.show(slug);
       setTaskDetails(task);
+      setAssignedUser(assigned_user);
     } catch (error) {
       logger.error(error);
     } finally {
@@ -40,8 +42,9 @@ const Show = () => {
 
   return (
     <Container>
-      <h1 className="pb-3 pl-3 mt-3 mb-3 text-lg leading-5 text-bb-gray border-b border-bb-gray">
-        <span>Task Title : </span> {taskDetails?.title}
+      <h1 className="pb-3 pl-3 mt-3 mb-3 text-lg leading-5 text-gray-800 border-b border-gray-500">
+        <span className="text-gray-600">Task Title : </span>{" "}
+        {taskDetails?.title}
       </h1>
       <div className="bg-bb-env px-2 mt-2 mb-4 rounded">
         <i
@@ -49,6 +52,10 @@ const Show = () => {
           onClick={updateTask}
         />
       </div>
+      <h2 className="pb-3 pl-3 mt-3 mb-3 text-lg leading-5 text-gray-800 border-b border-gray-500">
+        <span className="text-gray-600">Assigned To : </span>
+        {assignedUser?.name}
+      </h2>
     </Container>
   );
 };
