@@ -6,12 +6,13 @@ import { ToastContainer } from "react-toastify";
 
 import { registerIntercepts, setAuthHeaders } from "apis/axios";
 import { initializeLogger } from "common/logger";
-import { Login, Signup } from "components/Authentication";
 import PrivateRoute from "components/Common/PrivateRoute";
 import Dashboard from "components/Dashboard";
 import PageLoader from "components/PageLoader";
 import { CreateTask, ShowTask, EditTask } from "components/Tasks";
 import { getFromLocalStorage } from "utils/storage";
+
+import { Login, Signup } from "./components/Authentication";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
