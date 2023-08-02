@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const logout = () => axios.delete(`/session`);
+
 const login = payload =>
   axios.post("/session", {
     login: payload,
@@ -13,6 +15,7 @@ const signup = payload =>
 const authApi = {
   login,
   signup,
+  logout,
 };
 
 export default authApi;
