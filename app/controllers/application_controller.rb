@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   protect_from_forgery
 
   rescue_from StandardError, with: :handle_api_exception
+  rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
 
   before_action :authenticate_user_using_x_auth_token
 
@@ -12,8 +15,8 @@ class ApplicationController < ActionController::Base
     when -> (e) { e.message.include?("PG::") || e.message.include?("SQLite3::") }
       handle_database_level_exception(exception)
 
-    # when Pundit::NotAuthorizedError
-    #   handle_authorization_error
+    when Pundit::NotAuthorizedError
+      handle_authorization_error
 
     when ActionController::ParameterMissing
       render_error(exception, :internal_server_error)
@@ -35,10 +38,6 @@ class ApplicationController < ActionController::Base
 
   def handle_database_level_exception(exception)
     handle_generic_exception(exception, :unprocessable_entity)
-  end
-
-  def handle_authorization_error
-    render_error("Access denied. You are not authorized to perform this action.", :forbidden)
   end
 
   def handle_generic_exception(exception, status = :internal_server_error)
@@ -89,5 +88,9 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @current_user
+    end
+
+    def handle_authorization_error
+      render_error(t("authorization.denied"), :forbidden)
     end
 end
