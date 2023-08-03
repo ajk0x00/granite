@@ -53,11 +53,16 @@ gem "bcrypt", "~> 3.1.13"
 gem "simplecov", require: false, group: :test
 
 group :development, :test do
-  # previous gems under this group as it was
+  # Rails integration for factory_bot, a replacement for fixtures
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 
   # For code formatting and linting
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+
 end
 
 group :development do
