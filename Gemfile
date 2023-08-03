@@ -50,6 +50,8 @@ gem "react-rails"
 
 gem "bcrypt", "~> 3.1.13"
 
+gem "simplecov", require: false, group: :test
+
 group :development, :test do
   # previous gems under this group as it was
 
